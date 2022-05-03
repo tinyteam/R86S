@@ -31,5 +31,6 @@ vi package/kernel/linux/Makefile
   # STAMP_BUILT:=$(STAMP_BUILT)_$(shell $(SCRIPT_DIR)/kconfig.pl $(LINUX_DIR)/.config | mkhash md5)
   STAMP_BUILT:=$(STAMP_BUILT)_$(shell cat $(LINUX_DIR)/.vermagic)
   
-make -j $(nproc) kernel_menuconfig
+
+make -j $(nproc) defconfig download clean world
 ```
