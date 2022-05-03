@@ -64,9 +64,18 @@ reboot
 ```
 vi /etc/default/grub
 
-GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt"
+    GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt"
 
 update-grub
 
+vi /etc/modules
+
+    vfio
+    vfio_iommu_type1
+    vfio_pci
+    vfio_virqfd
+    
 reboot
+
+dmesg | grep 'remapping'
 ```
