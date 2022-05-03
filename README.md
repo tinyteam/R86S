@@ -104,6 +104,10 @@ vi /etc/modprobe.d/mlx4_core.conf
     
 modprobe -r mlx4_en mlx4_ib
 modprobe mlx4_en
+
+update-initramfs -u
+
+reboot
 ```
 
 
