@@ -79,3 +79,31 @@ reboot
 
 dmesg | grep 'remapping'
 ```
+
+### Configuring SR-IOV for a Mellanox ConnectX-3 NIC
+
+> https://that.guru/blog/sriov-mellanox-connectx-3/
+
+```
+apt install mstflint
+
+lspci | grep Mellanox
+
+mstconfig -d 04:00.0 query
+
+mstconfig -d 04:00.0 set SRIOV_EN=1 NUM_OF_VFS=8
+
+reboot
+
+mstconfig -d 04:00.0 query
+mstflint -d 04:00.0 q
+
+vi /etc/modprobe.d/mlx4_core.conf
+
+    options mlx4_core num_vfs=4,4,0 port_type_array=2,2 probe_vf=4,4,0 probe_vf=4,4,0
+    
+modprobe -r mlx4_en mlx4_ib
+modprobe mlx4_en
+```
+
+
