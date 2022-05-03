@@ -33,3 +33,40 @@ dd bs=1M conv=fdatasync if=./proxmox-ve_*.iso of=/dev/XYZ
 ```
 5. 保存退出后，继续 Ctrl-D
 
+### Mirrors configuration
+
+```
+vi /etc/apt/sources.list
+```
+
+```
+# 阿里云
+deb http://mirrors.aliyun.com/debian bullseye main contrib
+
+deb http://mirrors.aliyun.com/debian bullseye-updates main contrib
+
+deb http://mirrors.aliyun.com/debian-security bullseye-security main contrib
+
+# 中国科学技术大学 Linux 用户协会
+deb http://mirrors.ustc.edu.cn/proxmox/debian/pve bullseye pve-no-subscription
+```
+
+```
+apt-get update && apt-get upgrade
+
+reboot
+```
+
+### PCI passthrough
+
+> https://pve.proxmox.com/wiki/Pci_passthrough
+
+```
+vi /etc/default/grub
+
+GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt"
+
+update-grub
+
+reboot
+```
